@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .student {
+            background-color: #ffffff;
+            color: #1e3a8a;
+            border-radius: 10px;
+            padding: 30px;
+            width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table input,
+        table select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        td label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 20px;
+            font-weight: 500;
+            color: #1e3a8a;
+        }
+
+        td label input[type="radio"] {
+            margin-right: 6px;
+        }
+
+
+        button[type="submit"] {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1d4ed8;
+        }
+
+        #eight th {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            padding: 10px;
+        }
+
+        #eight td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #eight {
+            margin-top: 30px;
+            background-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .delete {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="student">
+        <h1>STUDENT FORM</h1>
+        <form id="stuform">
+            <table border="1">
+                <tr>
+                    <td>Name</td>
+                    <td> <input id="two" type="text" placeholder="Enter name"></td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td> <input id="three" type="number"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <label>Male <input type="radio" name="jash" value="male" required></label>
+                        <label style="margin-left: 20px;">Female <input type="radio" name="jash" value="female"></label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Course</td>
+                    <td>
+                        <select id="four">
+                            <option>HTML</option>
+                            <option>CSS</option>
+                            <option>JavaScript</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td> <input type="email" id="email"> </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="one" type="submit">Save</button>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <table border="1" style="border-collapse: collapse;" id="eight">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Course</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        var f = document.getElementById("stuform");
+        var g = document.getElementById("eight").getElementsByTagName('tbody')[0];
+        f.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var a = document.getElementById("two").value;
+            var b = document.getElementById("three").value;
+            var c = document.querySelector('input[name="jash"]:checked').value;
+            var d = document.getElementById("four").value;
+            var e = document.getElementById("email").value;
+
+            var row = g.insertRow();
+            row.innerHTML =
+                "<td>" + a + "</td>" +
+                "<td>" + b + "</td>" +
+                "<td>" + c + "</td>" +
+                "<td>" + d + "</td>" +
+                "<td>" + e + "</td>" +
+                "<td><button class='delete'>Delete</button></td>";
+            f.reset();
+        });
+
+        g.addEventListener("click", function (e) {
+            if (e.target.classList.contains('delete')) {
+                var del = e.target.closest('tr');
+                del.remove();
+            }
+        });
+    </script>
+</body>
+
+</html>
